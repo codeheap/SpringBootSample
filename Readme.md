@@ -6,8 +6,9 @@ Gradle installation is not required, because the project contains a Gradle wrapp
 ##Build and Run
 
 To build and run the Application run the following Command in a shell:
-
+```bash
 ./gradlew bootRun
+```
 
 Default is listening on port 8080.
 To check the service is running check: [Health monitor](http://localhost:8080/health/)
@@ -18,10 +19,13 @@ The service named "/greeting" sends a JSON - File back containing an ID and a st
 If you pass a parameter named "name" as a string, the content will be modified.
 
 [Default request](http://localhost:8080/greeting)
+
 [Modified request](http://localhost:8080/greeting?name=Stranger)
 
 ##Additional information
 
 If you want to see which task's are available for the project:
 
-./gradlew tasks 
+```bash
+./gradlew tasks
+``` 
