@@ -1,39 +1,20 @@
 {
-	"id": "da67bd58-d313-af73-46ae-889f64fbc839",
+	"id": "7caaf889-318e-a8fb-82ae-e073c75dd5b6",
 	"name": "SpringBootSample",
 	"description": "",
 	"order": [
-		"3a469057-ff6a-a8d8-08ab-a1203e228aef",
-		"f142a2ea-6d50-aac8-9339-3915df22f6b9",
-		"9d473683-e3f8-9c5d-d0a9-866b34947a29"
+		"3a3a7bb7-3d10-161b-2ccf-5ea70ae3fccb",
+		"c40947de-281b-1496-2ab3-c5665bfc4496",
+		"1ea2a655-2af8-99e9-2727-d57ef552eff8"
 	],
 	"folders": [],
 	"timestamp": 1456155383304,
 	"owner": 0,
-	"remoteLink": "",
 	"public": false,
+	"hasRequests": true,
 	"requests": [
 		{
-			"id": "3a469057-ff6a-a8d8-08ab-a1203e228aef",
-			"headers": "",
-			"url": "http://localhost:8080/greeting",
-			"preRequestScript": "",
-			"pathVariables": {},
-			"method": "GET",
-			"data": [],
-			"dataMode": "params",
-			"version": 2,
-			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\ntests[\"default content\"] = jsonData.content === \"Hello, World!\";\ntests[\"Id counter positive\"] = jsonData.id > 0;\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1456156285412,
-			"name": "default",
-			"description": "",
-			"collectionId": "da67bd58-d313-af73-46ae-889f64fbc839",
-			"responses": []
-		},
-		{
-			"id": "9d473683-e3f8-9c5d-d0a9-866b34947a29",
+			"id": "1ea2a655-2af8-99e9-2727-d57ef552eff8",
 			"headers": "",
 			"url": "http://localhost:8080/health/",
 			"preRequestScript": "",
@@ -48,11 +29,30 @@
 			"time": 1456247214539,
 			"name": "http://localhost:8080/health/",
 			"description": "Server health check",
-			"collectionId": "da67bd58-d313-af73-46ae-889f64fbc839",
+			"collectionId": "7caaf889-318e-a8fb-82ae-e073c75dd5b6",
 			"responses": []
 		},
 		{
-			"id": "f142a2ea-6d50-aac8-9339-3915df22f6b9",
+			"id": "3a3a7bb7-3d10-161b-2ccf-5ea70ae3fccb",
+			"headers": "",
+			"url": "http://localhost:8080/greeting",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "tests[\"Status code is 200\"] = responseCode.code === 200;\n\nvar jsonData = JSON.parse(responseBody);\ntests[\"default content\"] = jsonData.content === \"Hello, Stranger!\";\ntests[\"Id counter positive\"] = jsonData.id > 0;\n",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1456256451053,
+			"name": "default",
+			"description": "",
+			"collectionId": "7caaf889-318e-a8fb-82ae-e073c75dd5b6",
+			"responses": []
+		},
+		{
+			"id": "c40947de-281b-1496-2ab3-c5665bfc4496",
 			"headers": "",
 			"url": "http://localhost:8080/greeting?name=Thomas",
 			"preRequestScript": "",
@@ -67,7 +67,7 @@
 			"time": 1456156282526,
 			"name": "http://localhost:8080/greeting?name=Thomas",
 			"description": "",
-			"collectionId": "da67bd58-d313-af73-46ae-889f64fbc839",
+			"collectionId": "7caaf889-318e-a8fb-82ae-e073c75dd5b6",
 			"responses": []
 		}
 	]
