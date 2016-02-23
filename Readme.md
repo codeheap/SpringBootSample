@@ -22,6 +22,11 @@ If you pass a parameter named "name" as a string, the content will be modified.
 
 [Modified request](http://localhost:8080/greeting?name=Stranger)
 
+##Postman Collection
+
+In the folder /src/test/postman you can find a file containing a collection which can be imported into *postman*. 
+The collection has also embedded some test's. 
+
 ##Additional information
 
 If you want to see which task's are available for the project:
