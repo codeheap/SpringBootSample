@@ -1,4 +1,4 @@
-package ch.froorider.samples;
+package ch.froorider.samples.domain;
 
 public class Greeting{
     

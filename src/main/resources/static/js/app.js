@@ -10,6 +10,6 @@ app.config(function ($routeProvider) {
             controller: 'rolesController'
         })
         .otherwise(
-        { redirectTo: '/' }
+        { redirectTo: '/greeting' }
         );
 });

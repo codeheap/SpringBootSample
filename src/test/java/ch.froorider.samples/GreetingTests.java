@@ -1,5 +1,6 @@
 package ch.froorider.samples;
 
+import ch.froorider.samples.domain.*;
 import org.junit.Assert;
 import org.junit.Test;
 
