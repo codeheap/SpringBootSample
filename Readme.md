@@ -1,4 +1,4 @@
-# SpringBootSample
+# SpringBootSample [![Build Status](https://travis-ci.org/codeheap/Pasadena.svg?branch=master)](https://travis-ci.org/codeheap/Pasadena)
 
 This is a personal sample of a SpringBoot powered REST-ful Webservice. The Application can be build and run using *Gradle*. 
 Gradle installation is not required, because the project contains a Gradle wrapper.
