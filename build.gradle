@@ -13,11 +13,14 @@ buildscript{
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
+        classpath("se.transmode.gradle:gradle-docker:1.2")
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'docker'
+apply plugin: 'build-dashboard'
 
 repositories{
     mavenCentral()
@@ -31,14 +34,25 @@ dependencies{
     testCompile 'junit:junit:4.+'
 }
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 version = '0.1.0'
 jar {
+    baseName = 'SpringBootSample'
     manifest {
         attributes  'Implementation-Title': 'Sample REST Webservice based on Spring Boot',
                     'Implementation-Version': version,
                     'Main-Class': 'ch.froorider.samples.Application'
     }
+}
+
+task copyApp(type:Copy, dependsOn:build){
+    from './build/libs/SpringBootSample-0.1.0.jar'
+    into './build/tmp'
+}
+
+task copyDockerFile(type:Copy, dependsOn:copyApp){
+    from './src/main/docker/Dockerfile'
+    into './build/tmp'
 }
 
 
