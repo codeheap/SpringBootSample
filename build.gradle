@@ -4,29 +4,28 @@
  *
  * This generated file contains a commented-out sample Java project to get you started.
  * For more details take a look at the Java Quickstart chapter in the Gradle
- * user guide available at https://docs.gradle.org/2.10/userguide/tutorial_java_projects.html
- */
-buildscript{
+ * user guide available at https://docs.gradle.org/2.10/userguide/tutorial_java_projects.html */
+buildscript {
     repositories {
         mavenCentral()
+        maven {url 'https://plugins.gradle.org/m2' }
     }
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
-        classpath("se.transmode.gradle:gradle-docker:1.2")
+        classpath('com.gradle:build-scan-plugin:1.7')
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'docker'
-apply plugin: 'build-dashboard'
+apply plugin:'com.gradle.build-scan'
+apply plugin:'java'
+apply plugin:'org.springframework.boot'
 
-repositories{
+repositories {
     mavenCentral()
 }
 
-dependencies{
+dependencies {
     compile("org.slf4j:slf4j-api")
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile("org.springframework.boot:spring-boot-starter-actuator")
@@ -36,24 +35,38 @@ dependencies{
 
 sourceCompatibility = 1.8
 version = '0.1.0'
+
 jar {
     baseName = 'SpringBootSample'
     manifest {
-        attributes  'Implementation-Title': 'Sample REST Webservice based on Spring Boot',
-                    'Implementation-Version': version,
-                    'Main-Class': 'ch.froorider.samples.Application'
+        attributes  'Implementation-Title':'Sample REST Webservice based on Spring Boot', 
+                    'Implementation-Version':version, 
+                    'Main-Class':'ch.froorider.samples.Application'
     }
 }
 
-task copyApp(type:Copy, dependsOn:build){
+task copyApp(type:Copy, dependsOn:build) {
     from './build/libs/SpringBootSample-0.1.0.jar'
     into './build/tmp'
 }
 
-task copyDockerFile(type:Copy, dependsOn:copyApp){
+task copyDockerFile(type:Copy, dependsOn:copyApp) {
     from './src/main/docker/Dockerfile'
     into './build/tmp'
 }
 
+task buildDocker(type:Exec){
+    workingDir './build/tmp'
+    commandLine 'cmd','/c','docker build -t codeheap/springbootsample:latest -t codeheap/springbootsample:0.1 .'
+}
 
+task publishDocker(type:Exec, dependsOn:buildDocker){
+    workingDir './build/tmp'
+    commandLine 'cmd','/c','docker push codeheap/springbootsample:latest'
+    commandLine 'cmd','/c','docker push codeheap/springbootsample:0.1'
+}
 
+buildScan {
+    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+    licenseAgree = 'yes'
+}
