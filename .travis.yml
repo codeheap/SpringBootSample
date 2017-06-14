@@ -1,7 +1,13 @@
+sudo: required
+
 language: java
+
+services:
+ - docker
 
 before_install:
  - chmod +x gradlew
+ - docker ps -a
 
 jdk:
  - oraclejdk8
