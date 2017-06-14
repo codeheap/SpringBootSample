@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class GreetingController{
     
     private static final String template = "Hello, %s!";
@@ -19,8 +20,13 @@ public class GreetingController{
         return new Greeting(counter.incrementAndGet(), String.format(template,name));
     }
     
-    @RequestMapping(value="/",method=RequestMethod.GET)
-    public String getHomePage(){
+    @RequestMapping(value="/")
+    public @ResponseBody String getHomePage(){
         return "index";
+    }
+
+    @RequestMapping(value="/tron")
+    public @ResponseBody Tron getTron(){
+        return new Tron();
     }
 }
