@@ -5,7 +5,7 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
           org.label-schema.vcs-url="https://github.com/codeheap/SpringBootSample"
 VOLUME /tmp
 EXPOSE 8080:8080
-ADD SpringBootSample-0.4.0.jar app.jar
+ADD SpringBootSample-0.4.1.jar app.jar
 RUN sh -c 'touch /app.jar'
 RUN apk add --no-cache curl
 ENV JAVA_OPTS=""
