@@ -22,6 +22,14 @@ If you pass a parameter named "name" as a string, the content will be modified.
 
 [Modified request](http://localhost:8080/greeting?name=Stranger)
 
+## Deployments
+
+The app is available live on [Google container engine](http://35.189.250.127:8080/greeting)
+
+The swagger-ui should also be on [Live Swagger-UI](http://35.189.250.127:8080/swagger-ui.html)
+
+App is also available as docker image [Docker Hub Image](https://hub.docker.com/r/codeheap/springbootsample/)
+
 ## Postman Collection
 
 In the folder /src/test/postman you can find a file containing a collection which can be imported into *postman*. 
