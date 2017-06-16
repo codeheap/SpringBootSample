@@ -37,7 +37,7 @@ dependencies {
 }
 
 sourceCompatibility = 1.8
-version = '0.2.0'
+version = '0.3.0'
 
 jar {
     baseName = 'SpringBootSample'
@@ -49,7 +49,7 @@ jar {
 }
 
 task copyApp(type:Copy, dependsOn:build) {
-    from './build/libs/SpringBootSample-0.2.0.jar'
+    from './build/libs/SpringBootSample-0.3.0.jar'
     into './build/tmp'
 }
 
@@ -60,13 +60,13 @@ task copyDockerFile(type:Copy, dependsOn:copyApp) {
 
 task buildDocker(type:Exec){
     workingDir './build/tmp'
-    commandLine 'cmd','/c','docker build -t codeheap/springbootsample:latest -t codeheap/springbootsample:0.2 .'
+    commandLine 'cmd','/c','docker build -t codeheap/springbootsample:latest -t codeheap/springbootsample:0.3 .'
 }
 
 task publishDocker(type:Exec, dependsOn:buildDocker){
     workingDir './build/tmp'
     commandLine 'cmd','/c','docker push codeheap/springbootsample:latest'
-    commandLine 'cmd','/c','docker push codeheap/springbootsample:0.2'
+    commandLine 'cmd','/c','docker push codeheap/springbootsample:0.3'
 }
 
 buildScan {
