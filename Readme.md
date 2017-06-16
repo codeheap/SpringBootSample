@@ -1,4 +1,7 @@
-# SpringBootSample [![Build Status](https://travis-ci.org/codeheap/SpringBootSample.svg?branch=master)](https://travis-ci.org/codeheap/SpringBootSample)
+# SpringBootSample 
+
+Build Status [![Build Status](https://travis-ci.org/codeheap/SpringBootSample.svg?branch=master)](https://travis-ci.org/codeheap/SpringBootSample) 
+Docker  [![Docker](https://images.microbadger.com/badges/version/codeheap/springbootsample:0.4.svg)](https://microbadger.com/images/codeheap/springbootsample:0.4 "Get your own version badge on microbadger.com")
 
 This is a personal sample of a SpringBoot powered REST-ful Webservice. The Application can be build and run using *Gradle*. 
 Gradle installation is not required, because the project contains a Gradle wrapper.

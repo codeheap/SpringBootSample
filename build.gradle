@@ -68,8 +68,8 @@ task copyDockerFile(type:Copy, dependsOn:copyApp) {
 
 task buildDocker(type:Exec){
     workingDir './build/tmp'
-    commandLine 'cmd','/c','docker build -t codeheap/springbootsample:latest .'
-    commandLine 'cmd','/c','docker build -t codeheap/springbootsample:0.4 .'
+    commandLine 'cmd','/c','docker build --rm -t codeheap/springbootsample:latest .'
+    commandLine 'cmd','/c','docker build --rm -t codeheap/springbootsample:0.4 .'
 }
 
 task publishDocker(type:Exec, dependsOn:buildDocker){
