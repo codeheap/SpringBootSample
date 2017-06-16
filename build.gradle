@@ -14,12 +14,14 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
         classpath('com.gradle:build-scan-plugin:1.7')
+        classpath('org.ajoberstar:gradle-git:1.7.2')
     }
 }
 
 apply plugin:'com.gradle.build-scan'
 apply plugin:'java'
 apply plugin:'org.springframework.boot'
+apply plugin: 'org.ajoberstar.grgit'
 
 repositories {
     jcenter()
@@ -40,8 +42,14 @@ dependencies {
     testCompile 'junit:junit:4.+'
 }
 
+ext{
+    gitID = "${grgit.head().abbreviatedId}"
+    revision = "1.0.0-${grgit.head().abbreviatedId}"
+}
+
 sourceCompatibility = 1.8
 version = '0.4.1'
+
 
 jar {
     baseName = 'SpringBootSample'
@@ -68,14 +76,38 @@ task copyDockerFile(type:Copy, dependsOn:copyApp) {
 
 task buildDocker(type:Exec){
     workingDir './build/tmp'
-    commandLine 'cmd','/c','docker build --rm -t codeheap/springbootsample:latest .'
-    commandLine 'cmd','/c','docker build --rm -t codeheap/springbootsample:0.4 .'
+    commandLine 'cmd','/c',"docker build --rm --build-arg VCS_REF="+gitID+" -t codeheap/springbootsample:0.4 ."
+}
+
+task buildLatestDocker(type:Exec){
+    workingDir './build/tmp'
+    commandLine 'cmd','/c',"docker build --rm --build-arg VCS_REF="+gitID+" -t codeheap/springbootsample:latest ."
+}
+
+task buildAllDocker(){
+    dependsOn 'buildDocker'
+    dependsOn 'buildLatestDocker'
 }
 
 task publishDocker(type:Exec, dependsOn:buildDocker){
     workingDir './build/tmp'
-    commandLine 'cmd','/c','docker push codeheap/springbootsample:latest'
     commandLine 'cmd','/c','docker push codeheap/springbootsample:0.4'
+}
+
+task publishLatestDocker(type:Exec, dependsOn:buildLatestDocker){
+    workingDir './build/tmp'
+    commandLine 'cmd','/c','docker push codeheap/springbootsample:latest'
+}
+
+task publishAllDocker(){
+    dependsOn 'publishDocker'
+    dependsOn 'publishLatestDocker'
+}
+
+task printProperties{
+    println version
+    println gitID
+    println revision
 }
 
 buildScan {
