@@ -13,7 +13,7 @@ buildscript {
 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
-        classpath('com.gradle:build-scan-plugin:1.7')
+        classpath('com.gradle:build-scan-plugin:1.8')
         classpath('org.ajoberstar:gradle-git:1.7.2')
     }
 }
@@ -85,6 +85,7 @@ task buildLatestDocker(type:Exec){
 }
 
 task buildAllDocker(){
+    dependsOn 'copyDockerFile'
     dependsOn 'buildDocker'
     dependsOn 'buildLatestDocker'
 }
@@ -100,6 +101,7 @@ task publishLatestDocker(type:Exec, dependsOn:buildLatestDocker){
 }
 
 task publishAllDocker(){
+    dependsOn 'buildAllDocker'
     dependsOn 'publishDocker'
     dependsOn 'publishLatestDocker'
 }
