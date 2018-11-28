@@ -17,9 +17,6 @@ gradle-app.setting
 *.class
 bin/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
 # Package Files #
 *.jar
 *.war
@@ -30,10 +27,11 @@ hs_err_pid*
 
 ### VisualStudioCode ###
 .vscode
+.classpath
 
 ###IntelliJ ###
-
 .idea
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
+.settings/org.eclipse.buildship.core.prefs
