@@ -12,8 +12,8 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
-        classpath('com.gradle:build-scan-plugin:1.8')
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.17.RELEASE")
+        classpath('com.gradle:build-scan-plugin:2.0.2')
         classpath('org.ajoberstar:gradle-git:1.7.2')
     }
 }
@@ -113,6 +113,8 @@ task printProperties{
 }
 
 buildScan {
-    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
-    licenseAgree = 'yes'
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'    
+    termsOfServiceAgree = 'yes'                                  
+
+    publishAlways()                                              
 }
