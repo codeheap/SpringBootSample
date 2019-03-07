@@ -75,11 +75,13 @@ task copyDockerFile(type:Copy, dependsOn:copyApp) {
 }
 
 task buildDocker(type:Exec){
+    mustRunAfter(copyDockerFile)
     workingDir './build/tmp'
     commandLine 'cmd','/c',"docker build --rm --build-arg VCS_REF="+gitID+" -t codeheap/springbootsample:0.4 ."
 }
 
 task buildLatestDocker(type:Exec){
+    mustRunAfter(buildDocker)
     workingDir './build/tmp'
     commandLine 'cmd','/c',"docker build --rm --build-arg VCS_REF="+gitID+" -t codeheap/springbootsample:latest ."
 }
@@ -96,12 +98,12 @@ task publishDocker(type:Exec, dependsOn:buildDocker){
 }
 
 task publishLatestDocker(type:Exec, dependsOn:buildLatestDocker){
+    mustRunAfter(publishDocker)
     workingDir './build/tmp'
     commandLine 'cmd','/c','docker push codeheap/springbootsample:latest'
 }
 
 task publishAllDocker(){
-    dependsOn 'buildAllDocker'
     dependsOn 'publishDocker'
     dependsOn 'publishLatestDocker'
 }
