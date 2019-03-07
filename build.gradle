@@ -94,13 +94,23 @@ task buildAllDocker(){
 
 task publishDocker(type:Exec, dependsOn:buildDocker){
     workingDir './build/tmp'
-    commandLine 'cmd','/c','docker push codeheap/springbootsample:0.4'
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine 'cmd','/c','docker push codeheap/springbootsample:0.4'
+    }
+    else{
+        commandLine 'docker push codeheap/springbootsample:0.4'
+    }
 }
 
 task publishLatestDocker(type:Exec, dependsOn:buildLatestDocker){
     mustRunAfter(publishDocker)
     workingDir './build/tmp'
-    commandLine 'cmd','/c','docker push codeheap/springbootsample:latest'
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine 'cmd','/c','docker push codeheap/springbootsample:latest'
+    }
+    else{
+        commandLine 'docker push codeheap/springbootsample:latest'
+    }
 }
 
 task publishAllDocker(){
