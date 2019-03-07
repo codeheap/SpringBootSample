@@ -15,6 +15,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.17.RELEASE")
         classpath('com.gradle:build-scan-plugin:2.0.2')
         classpath('org.ajoberstar:gradle-git:1.7.2')
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7")
     }
 }
 
@@ -22,13 +23,12 @@ apply plugin:'com.gradle.build-scan'
 apply plugin:'java'
 apply plugin:'org.springframework.boot'
 apply plugin: 'org.ajoberstar.grgit'
+apply plugin: "org.sonarqube"
 
 repositories {
     jcenter()
     mavenCentral()
-    maven {
-        url 'https://repo.spring.io/libs-snapshot'
-    }
+    maven {url 'https://repo.spring.io/libs-snapshot'}
 }
 
 dependencies {
@@ -62,6 +62,12 @@ jar {
 
 springBoot  {
     buildInfo()
+}
+
+sonarqube {
+    properties {
+        property "sonar.exclusions", "**/*Generated.java"
+    }
 }
 
 task copyApp(type:Copy, dependsOn:build) {
