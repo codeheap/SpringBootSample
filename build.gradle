@@ -77,13 +77,23 @@ task copyDockerFile(type:Copy, dependsOn:copyApp) {
 task buildDocker(type:Exec){
     mustRunAfter(copyDockerFile)
     workingDir './build/tmp'
-    commandLine 'cmd','/c',"docker build --rm --build-arg VCS_REF="+gitID+" -t codeheap/springbootsample:0.4 ."
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        commandLine 'cmd','/c',"docker build --rm --build-arg VCS_REF="+gitID+" -t codeheap/springbootsample:0.4 ."
+    }
+    else{
+        commandLine 'docker build --rm --build-arg VCS_REF='+gitID+' -t codeheap/springbootsample:0.4 .'
+    }
 }
 
 task buildLatestDocker(type:Exec){
     mustRunAfter(buildDocker)
     workingDir './build/tmp'
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
     commandLine 'cmd','/c',"docker build --rm --build-arg VCS_REF="+gitID+" -t codeheap/springbootsample:latest ."
+    }
+    else{
+        commandLine 'docker build --rm --build-arg VCS_REF='+gitID+' -t codeheap/springbootsample:latest .'
+    }
 }
 
 task buildAllDocker(){
